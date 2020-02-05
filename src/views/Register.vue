@@ -115,12 +115,12 @@ export default {
       let m = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
       let a = /^[a-z]+$/; //小写字母组成
       let p = /^[A-Za-z]+[0-9]+[A-Za-z0-9]*|[0-9]+[A-Za-z]+[A-Za-z0-9]*$/g;
-      let data = {
-        username: "",
-        password: "",
-        tel: "",
-        email: "",
-        rePassword: ""
+      const data = {
+        username: '',//this.userInfo.username,
+        password: '',//this.userInfo.password,
+        tel: '',//this.userInfo.tel,
+        email: '',//this.userInfo.email,
+        rePassword:'',//this.userInfo.rePassword
         // statePrompt: ""
       };
       if (
@@ -160,6 +160,7 @@ export default {
               this.userInfo.rePassword,
             data: data
           })
+         
             .then(response => {
               if (
                 /*response.data.code>= 200 && response.data.code < 300*/
@@ -175,6 +176,23 @@ export default {
                 console.log(response.data);
               }
             })
+            //  axios
+            // .post("http://api.ywbang.top/user/register",data2)
+            // .then(({ data }) =>{
+            //     if (
+            //     /*response.data.code>= 200 && response.data.code < 300*/
+            //     data.msg == "ok"
+            //   ) {
+            //     this.statePrompt = "注册成功！";
+            //     console.log(data);
+            //     alert("注册成功");
+            //     // let self = this;
+            //     this.$router.push("/");
+            //   } else {
+            //     this.statePrompt = data.msg;
+            //     console.log(data);
+            //   }
+            // })
             .catch(error => {
               this.statePrompt = error;
               console.log(error);

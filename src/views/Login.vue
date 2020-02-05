@@ -83,33 +83,31 @@ export default {
     addUser(name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          // this.axios();
-          let data = {
-            username: "",
-            password: ""
+          const data2 = {
+            username:this.formInline.user,
+            password:this.formInline.password
           };
-          // let self = this;
-          axios({
-            method: "post",
-            url:
-              "http://api.ywbang.top/user/login?username=" +
-              this.formInline.user +
-              "&password=" +
-              this.formInline.password,
-            data: data
-          })
-            .then(response => {
+          axios
+            .post("http://api.ywbang.top/user/login",data2)
+            // url:
+            //   "http://api.ywbang.top/user/login?username=" +
+            //   this.formInline.user +
+            //   "&password=" +
+            //   this.formInline.password,
+            
+         
+            .then(({ data }) => {  //一个{data}可以直接把data的值取出来
               if (/*response.data.code >= 200 && response.data.code < 300*/
-              response.data.data.token != null) {
-                console.log(response.data);
+              data.token !== null) {
+                console.log(data);
                 alert("登录成功");
-              this.usertoken = response.data.data.token;
+              this.usertoken = data.data.token;
               this.$store.commit("setToken", this.usertoken);
               localStorage.setItem("token", this.usertoken);
               console.log(this.$store);
                 this.$router.push({ path: "/carousel" });
               } else {
-                console.log(response.message);
+                console.log(data.message);
                 alert("登录失败");
               }
             })
@@ -117,10 +115,19 @@ export default {
               this.statePrompt = error;
               // console.log(error);
             });
+      //  axios
+      // .get("http://api.ywbang.top/user/login",{params: data2})
+      // .then(({ data }) =>{
+      //   console.log(data)
+      // });
         } else {
           this.$Message.error("Fail");
         }
+         //git请求方法
+ 
       });
+
+     
     }
   }
 };

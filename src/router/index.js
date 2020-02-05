@@ -20,6 +20,7 @@ const router = new VueRouter({
     {
       path: "/carousel",
       name: "carousel",
+      //驼峰命名 首字母大写（大驼峰）
       // meta: {
       //   requireAuth: true
       // },
@@ -31,6 +32,7 @@ const router = new VueRouter({
       //   }
       // },
       component: () => import("../views/carousel.vue")
+      //懒加载 按需加载  
     }
     // {
     //   path: "/sRegisterSucess",
